@@ -24,7 +24,7 @@
     "expo-haptics": "^12.8.1",
     "expo-linear-gradient": "^12.7.1",
     "expo-splash-screen": "^0.26.4",
-    "expo-sqlite": "13.2.1",
+    "expo-sqlite": "~13.2.2",
     "expo-status-bar": "^1.11.1",
     "lottie-react-native": "^6.5.1",
     "react": "18.2.0",

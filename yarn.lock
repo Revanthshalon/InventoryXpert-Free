@@ -4650,14 +4650,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-sqlite@npm:13.2.1":
-  version: 13.2.1
-  resolution: "expo-sqlite@npm:13.2.1"
+"expo-sqlite@npm:~13.2.2":
+  version: 13.2.2
+  resolution: "expo-sqlite@npm:13.2.2"
   dependencies:
     "@expo/websql": "npm:^1.0.1"
   peerDependencies:
     expo: "*"
-  checksum: a7fc0badfff29e44e66a59b551807ed7b7972deb92337bbd21db26dedc0667ac6bc6b67713b183d6a2e2df32f84eb29c8f0f3c1e6ba98dc9edcc8b37bcc7ff1e
+  checksum: c120afc6e38373975bd91f485ad8aa4eb83da92c8ad49d42bd602d6dc5453146c9f197c5f4dc602804686c8d6c30878a5be312dac089e775beba5d2f42f8985b
   languageName: node
   linkType: hard
 
@@ -5446,7 +5446,7 @@ __metadata:
     expo-haptics: "npm:^12.8.1"
     expo-linear-gradient: "npm:^12.7.1"
     expo-splash-screen: "npm:^0.26.4"
-    expo-sqlite: "npm:13.2.1"
+    expo-sqlite: "npm:~13.2.2"
     expo-status-bar: "npm:^1.11.1"
     lottie-react-native: "npm:^6.5.1"
     react: "npm:18.2.0"
