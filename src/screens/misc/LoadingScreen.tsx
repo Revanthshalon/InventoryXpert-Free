@@ -6,7 +6,7 @@ type Props = {};
 const LoadingScreen = (props: Props) => {
   return (
     <View style={styles.container}>
-      <Text>LoadingScreen</Text>
+      <Text>Get a loading screen animation</Text>
     </View>
   );
 };
