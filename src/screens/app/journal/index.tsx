@@ -1,10 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { JournalStackParamList } from "../../../routes/app/journal/JournalStack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Header from "./components/header";
 import { useTheme } from "react-native-paper";
+import UpcomingPaymentsTable from "./components/UpcomingPaymentsTable";
 
 // Setting up type for the navigator
 type JournalNavigationProps = NavigationProp<JournalStackParamList, "Home">;
@@ -24,7 +31,7 @@ const Journal = () => {
   // Action Handlers
 
   return (
-    <View
+    <ScrollView
       style={[
         styles.containerWrapper,
         {
@@ -34,8 +41,9 @@ const Journal = () => {
         },
       ]}>
       <Header />
+      <UpcomingPaymentsTable />
       <Text>Journal</Text>
-    </View>
+    </ScrollView>
   );
 };
 
