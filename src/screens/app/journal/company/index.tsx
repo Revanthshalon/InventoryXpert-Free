@@ -8,20 +8,21 @@ import {
 import React from "react";
 import { Appbar, DataTable, useTheme } from "react-native-paper";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { JournalStackParamList } from "../../../routes/app/journal/JournalStack";
+import { JournalStackParamList } from "../../../../routes/app/journal/JournalStack";
 import { useNavigation } from "@react-navigation/native";
-import { PaymentData } from "../../../../data/data";
-import UpcomingPaymentDataRow from "./components/UpcomingPaymentDataRow";
+import { PaymentData, companyData } from "../../../../../data/data";
+import UpcomingPaymentDataRow from "../components/UpcomingPaymentDataRow";
+import CompaniesDataRow from "./components/CompaniesDataRow";
 
 type Props = {};
 
 // Setting up type for Navigator
 type JournalStackNavigationProp = NativeStackNavigationProp<
   JournalStackParamList,
-  "UpcomingPayments"
+  "CompaniesList"
 >;
 
-const UpcomingPayments = (props: Props) => {
+const CompaniesList = (props: Props) => {
   // Navigation Setup
   const navigation = useNavigation<JournalStackNavigationProp>();
 
@@ -39,25 +40,25 @@ const UpcomingPayments = (props: Props) => {
             navigation.goBack();
           }}
         />
-        <Appbar.Content title="Upcoming Payments" />
+        <Appbar.Content title="Companies List" />
       </Appbar.Header>
       <DataTable style={[styles.tableStyle, { height: SCREEN_HEIGHT - 150 }]}>
         <DataTable.Header>
           <DataTable.Title>Company Name</DataTable.Title>
-          <DataTable.Title>Amount</DataTable.Title>
-          <DataTable.Title>Payment Date</DataTable.Title>
+          <DataTable.Title>Due Amount</DataTable.Title>
+          <DataTable.Title>Recent Paid Date</DataTable.Title>
         </DataTable.Header>
         <FlatList
-          data={PaymentData}
-          keyExtractor={(payment) => payment.paymentId}
-          renderItem={({ item }) => <UpcomingPaymentDataRow payment={item} />}
+          data={companyData}
+          keyExtractor={(company) => company.companyId}
+          renderItem={({ item }) => <CompaniesDataRow company={item} />}
         />
       </DataTable>
     </View>
   );
 };
 
-export default UpcomingPayments;
+export default CompaniesList;
 
 const styles = StyleSheet.create({
   container: {

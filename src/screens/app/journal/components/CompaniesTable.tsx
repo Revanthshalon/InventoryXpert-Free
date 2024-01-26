@@ -147,7 +147,7 @@ const CompaniesTable = ({
         </DataTable>
         <Button
           onPress={() => {
-            navigation.push("UpcomingPayments");
+            navigation.push("CompaniesList");
           }}
           mode="outlined"
           style={[styles.buttonContainer]}>
