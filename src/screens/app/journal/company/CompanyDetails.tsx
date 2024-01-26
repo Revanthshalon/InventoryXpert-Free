@@ -1,4 +1,9 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { JournalStackParamList } from "../../../../routes/app/journal/JournalStack";
@@ -8,6 +13,7 @@ import {
   Button,
   Dialog,
   Divider,
+  IconButton,
   Portal,
   Text,
   useTheme,
@@ -29,6 +35,9 @@ type JournalStackNavigation = NativeStackNavigationProp<
 >;
 
 const CompanyDetails = (props: Props) => {
+  // Screen Dimensions
+  const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
+
   // Getting Route Params
   const route = useRoute<JournalStackRoute>();
   const { companyId } = route.params;
@@ -62,7 +71,10 @@ const CompanyDetails = (props: Props) => {
     <View
       style={[
         styles.container,
-        { backgroundColor: useTheme().colors.background },
+        {
+          backgroundColor: useTheme().colors.background,
+          height: SCREEN_HEIGHT + 1000,
+        },
       ]}>
       <Appbar.Header mode="small" elevated>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
@@ -90,27 +102,57 @@ const CompanyDetails = (props: Props) => {
         </Dialog>
       </Portal>
 
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {companyDetails && <CompanyCard companyDetails={companyDetails} />}
         <Divider bold style={{ marginVertical: 5, marginHorizontal: 10 }} />
-        <View style={{ marginHorizontal: 10, height: 300 }}>
-          <Text variant="headlineMedium">Related Payments</Text>
+        <View style={{ height: 375 }}>
+          <Text variant="headlineMedium" style={{ marginHorizontal: 10 }}>
+            Related Payments
+          </Text>
           {relatedPayments.length > 0 ? (
-            <CompanyRelatedPayments relatedPayments={relatedPayments} />
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={[{ width: SCREEN_WIDTH }]}>
+              <View style={[{ alignItems: "center", margin: 10 }]}>
+                <CompanyRelatedPayments relatedPayments={relatedPayments} />
+              </View>
+            </ScrollView>
           ) : (
-            <Text>No Related Payments</Text>
+            <Text style={{ marginHorizontal: 10 }}>No Related Payments</Text>
           )}
         </View>
         <Divider bold style={{ marginVertical: 5, marginHorizontal: 10 }} />
-        <View style={{ marginHorizontal: 10, height: 300 }}>
-          <Text variant="headlineMedium">Related Purchases</Text>
+        <View style={{ height: 450 }}>
+          <Text variant="headlineMedium" style={{ marginHorizontal: 10 }}>
+            Related Purchases
+          </Text>
           {relatedPayments.length > 0 ? (
-            <CompanyRelatedPurchases relatedPurchases={relatedPurchases} />
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={[{ width: SCREEN_WIDTH }]}>
+              <View style={[{ alignItems: "center", margin: 10 }]}>
+                <CompanyRelatedPurchases relatedPurchases={relatedPurchases} />
+              </View>
+            </ScrollView>
           ) : (
-            <Text>No Related Purchases</Text>
+            <Text style={{ marginHorizontal: 10 }}>No Related Purchases</Text>
           )}
         </View>
       </ScrollView>
+      <IconButton
+        icon="pencil"
+        size={35}
+        style={[
+          styles.fab,
+          {
+            borderColor: useTheme().colors.primary,
+          },
+        ]}
+        iconColor={useTheme().colors.primary}
+        onPress={() => {}}
+      />
     </View>
   );
 };
@@ -118,7 +160,11 @@ const CompanyDetails = (props: Props) => {
 export default CompanyDetails;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  container: { flex: 1 },
+  fab: {
+    position: "absolute",
+    bottom: 40,
+    right: 20,
+    borderWidth: StyleSheet.hairlineWidth,
   },
 });

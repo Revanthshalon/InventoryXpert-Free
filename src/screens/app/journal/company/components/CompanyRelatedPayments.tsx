@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, useWindowDimensions } from "react-native";
 import React from "react";
 import { DataTable, Surface } from "react-native-paper";
 import { Payment } from "../../../../../../data/data";
@@ -9,8 +9,12 @@ type Props = {
 };
 
 const CompanyRelatedPayments = ({ relatedPayments }: Props) => {
+  // screen dimesions
+  const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
   return (
-    <Surface style={styles.container}>
+    <Surface
+      elevation={3}
+      style={[styles.container, { width: SCREEN_WIDTH - 20 }]}>
       <DataTable>
         <DataTable.Header>
           <DataTable.Title>Payment Date</DataTable.Title>
@@ -32,6 +36,8 @@ export default CompanyRelatedPayments;
 
 const styles = StyleSheet.create({
   container: {
-    height: 250,
+    height: 300,
+    borderRadius: 10,
+    marginVertical: 10,
   },
 });
