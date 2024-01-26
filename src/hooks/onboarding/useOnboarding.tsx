@@ -26,3 +26,5 @@ const useOnboarding = () => {
 
   return [loading, onboardingState] as const;
 };
+
+export default useOnboarding;
