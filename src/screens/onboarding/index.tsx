@@ -5,9 +5,13 @@ import { StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 import { RootStackParamList } from "../../routes/RootStack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 // Get the Navigation Prop Type
-type RootStackProps = NavigationProp<RootStackParamList, "Onboarding">;
+type RootStackProps = NativeStackNavigationProp<
+  RootStackParamList,
+  "Onboarding"
+>;
 
 const Onboarding = () => {
   // Get Navigation
@@ -18,7 +22,7 @@ const Onboarding = () => {
     // Setting the onboarding state to true
     // so that the app will not show the onboarding screen again
     // Navigation to the App Screen
-    navigation.navigate("App");
+    navigation.replace("App");
     AsyncStorage.setItem("onboardingState", "true");
   };
 

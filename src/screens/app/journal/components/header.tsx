@@ -42,8 +42,10 @@ const Header = ({ containerStyle, labelStyle, labelVariant }: Props) => {
         },
         containerStyle,
       ]}>
-      <Text variant={labelVariant ?? "titleLarge"} style={[labelStyle]}>
-        Inventory Xperts
+      <Text
+        variant={labelVariant ?? "titleLarge"}
+        style={[styles.label, labelStyle]}>
+        Ix
       </Text>
       <IconButton
         icon="menu"
@@ -65,5 +67,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     flexDirection: "row",
     alignItems: "center",
+  },
+  label: {
+    paddingLeft: 10,
+    fontSize: 30,
   },
 });
