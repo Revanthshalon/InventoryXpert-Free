@@ -10,6 +10,7 @@ const useOnboarding = () => {
       try {
         const onboardingState = await AsyncStorage.getItem("onboardingState");
         if (onboardingState !== null) {
+          console.log("[Status: User onboarded]");
           setOnboardingState(true);
           setLoading(false);
         } else {
