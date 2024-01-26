@@ -1,4 +1,5 @@
 import {
+  Modal,
   ScrollView,
   StyleSheet,
   View,
@@ -22,6 +23,7 @@ import { Payment, Purchase, companyData } from "../../../../../data/data";
 import CompanyCard from "./components/CompanyCard";
 import CompanyRelatedPayments from "./components/CompanyRelatedPayments";
 import CompanyRelatedPurchases from "./components/CompanyRelatedPurchases";
+import EditCompanyForm from "./components/EditCompanyForm";
 
 type Props = {};
 
@@ -54,6 +56,7 @@ const CompanyDetails = (props: Props) => {
 
   // State
   const [showAlert, setShowAlert] = React.useState<boolean>(false);
+  const [showEdit, setShowEdit] = React.useState<boolean>(false);
 
   // Action Handler
   const deleteCompanyHandler = () => {
@@ -151,8 +154,14 @@ const CompanyDetails = (props: Props) => {
           },
         ]}
         iconColor={useTheme().colors.primary}
-        onPress={() => {}}
+        onPress={() => {setShowEdit(true)}}
       />
+      <Modal
+        visible={showEdit}
+        animationType="slide"
+        presentationStyle="formSheet">
+        <EditCompanyForm companyDetails={companyDetails} visibilityControl={setShowEdit} />
+      </Modal>
     </View>
   );
 };
