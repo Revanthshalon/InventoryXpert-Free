@@ -32,7 +32,7 @@ const RootLayout = (props: Props) => {
     return <LoadingScreen />;
   }
 
-  return onboardingState ? <Onboarding /> : <RootStack />;
+  return <RootStack onboarding={onboardingState}/>;
 };
 
 export default RootLayout;
