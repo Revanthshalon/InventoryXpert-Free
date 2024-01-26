@@ -59,7 +59,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    height: 60,
+    height: 63,
     justifyContent: "space-between",
     padding: 10,
     alignSelf: "center",
