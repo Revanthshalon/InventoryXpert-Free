@@ -12,6 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Header from "./components/header";
 import { useTheme } from "react-native-paper";
 import UpcomingPaymentsTable from "./components/UpcomingPaymentsTable";
+import CompaniesTable from "./components/CompaniesTable";
 
 // Setting up type for the navigator
 type JournalNavigationProps = NavigationProp<JournalStackParamList, "Home">;
@@ -32,17 +33,19 @@ const Journal = () => {
 
   return (
     <ScrollView
+      showsVerticalScrollIndicator={false}
       style={[
         styles.containerWrapper,
         {
           paddingTop: TOP_INSET,
           paddingBottom: BOTTOM_INSET,
           backgroundColor: useTheme().colors.background,
+          height: SCREEN_HEIGHT + TOP_INSET + BOTTOM_INSET,
         },
       ]}>
       <Header />
-      <UpcomingPaymentsTable />
-      <Text>Journal</Text>
+      <UpcomingPaymentsTable containerStyle={{ marginVertical: 10 }} />
+      <CompaniesTable containerStyle={{ marginVertical: 10 }} />
     </ScrollView>
   );
 };

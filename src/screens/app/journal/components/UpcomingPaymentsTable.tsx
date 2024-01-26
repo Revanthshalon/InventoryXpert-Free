@@ -92,7 +92,7 @@ const UpcomingPaymentsTable = ({
           ]}>
           Here are the upcoming payments
         </Text>
-        <DataTable style={{ height: 270 }}>
+        <DataTable style={{ height: 200 }}>
           <DataTable.Header>
             <DataTable.Title
               onPress={() => {
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     borderRadius: 10,
-    height: 400,
+    height: 330,
     marginHorizontal: 10,
   },
   buttonContainer: { width: 100, alignSelf: "flex-end", marginVertical: 10 },
