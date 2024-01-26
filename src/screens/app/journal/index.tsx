@@ -10,12 +10,16 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { JournalStackParamList } from "../../../routes/app/journal/JournalStack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Header from "./components/header";
-import { useTheme } from "react-native-paper";
+import { FAB, useTheme } from "react-native-paper";
 import UpcomingPaymentsTable from "./components/UpcomingPaymentsTable";
 import CompaniesTable from "./components/CompaniesTable";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 // Setting up type for the navigator
-type JournalNavigationProps = NavigationProp<JournalStackParamList, "Home">;
+type JournalNavigationProps = NativeStackNavigationProp<
+  JournalStackParamList,
+  "Home"
+>;
 
 const Journal = () => {
   // Navigation Setup
@@ -28,25 +32,68 @@ const Journal = () => {
   const { top: TOP_INSET, bottom: BOTTOM_INSET } = useSafeAreaInsets();
 
   // State
+  const [showAdd, setShowAdd] = React.useState<boolean>(false);
 
   // Action Handlers
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
+    <View
       style={[
-        styles.containerWrapper,
         {
+          flex: 1,
           paddingTop: TOP_INSET,
-          paddingBottom: BOTTOM_INSET,
           backgroundColor: useTheme().colors.background,
-          height: SCREEN_HEIGHT + TOP_INSET + BOTTOM_INSET,
         },
       ]}>
       <Header />
-      <UpcomingPaymentsTable containerStyle={{ marginVertical: 10 }} />
-      <CompaniesTable containerStyle={{ marginVertical: 10 }} />
-    </ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={[
+          styles.containerWrapper,
+          {
+            backgroundColor: useTheme().colors.background,
+            marginBottom: BOTTOM_INSET + 20,
+          },
+        ]}>
+        <UpcomingPaymentsTable containerStyle={{ marginVertical: 10 }} />
+        <CompaniesTable containerStyle={{ marginVertical: 10 }} />
+      </ScrollView>
+      <FAB.Group
+        open={showAdd}
+        visible
+        icon={showAdd ? "close" : "plus"}
+        actions={[
+          {
+            icon: "office-building",
+            label: "Add Company",
+            onPress: () => {
+              navigation.push("AddCompany");
+            },
+          },
+          {
+            icon: "credit-card",
+            label: "Add Payments",
+            onPress: () => {
+              navigation.push("AddPayments");
+            },
+          },
+          {
+            icon: "cart",
+            label: "Add Purchases",
+            onPress: () => {
+              navigation.push("AddPurchases");
+            },
+          },
+        ]}
+        onStateChange={({ open }) => setShowAdd(open)}
+        style={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          zIndex: 1,
+        }}
+      />
+    </View>
   );
 };
 

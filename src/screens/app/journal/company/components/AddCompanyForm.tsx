@@ -6,14 +6,11 @@ import {
   useWindowDimensions,
 } from "react-native";
 import React, { Dispatch, SetStateAction } from "react";
-import { company } from "../../../../../../data/data";
 import { Button, Text, TextInput, useTheme } from "react-native-paper";
 
-type Props = {
-  visibilityControl: Dispatch<SetStateAction<boolean>>;
-};
+type Props = {};
 
-const EditCompanyForm = ({ visibilityControl }: Props) => {
+const AddCompanyForm = () => {
   // Screen Dimensions
   const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
 
@@ -27,7 +24,6 @@ const EditCompanyForm = ({ visibilityControl }: Props) => {
 
   const submitForm = () => {
     formClear();
-    visibilityControl(false);
   };
 
   // State Variables
@@ -79,11 +75,7 @@ const EditCompanyForm = ({ visibilityControl }: Props) => {
               paddingVertical: 20,
             },
           ]}>
-          <Button
-            mode="outlined"
-            onPress={() => {
-              visibilityControl(false);
-            }}>
+          <Button mode="outlined" onPress={() => {}}>
             Close
           </Button>
           <Button mode="outlined" onPress={submitForm}>
@@ -95,7 +87,7 @@ const EditCompanyForm = ({ visibilityControl }: Props) => {
   );
 };
 
-export default EditCompanyForm;
+export default AddCompanyForm;
 
 const styles = StyleSheet.create({
   container: {
