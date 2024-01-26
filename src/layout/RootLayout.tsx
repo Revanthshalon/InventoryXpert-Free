@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import useOnboarding from "../hooks/onboarding/useOnboarding";
 import LoadingScreen from "../screens/misc/LoadingScreen";
+import Onboarding from "../screens/onboarding";
+import RootStack from "../routes/RootStack";
 
 type Props = {};
 
@@ -9,6 +10,7 @@ const RootLayout = (props: Props) => {
   // State to check if App is Ready
   const [appReady, setAppReady] = React.useState<boolean>(false);
 
+  // Check if user has completed onboarding
   const [loading, onboardingState] = useOnboarding();
 
   React.useEffect(() => {
@@ -26,16 +28,11 @@ const RootLayout = (props: Props) => {
   }, [loading]);
 
   if (!appReady) {
+    // Show Loading Screen if the user is Loading
     return <LoadingScreen />;
   }
 
-  return (
-    <View>
-      <Text>RootLayout</Text>
-    </View>
-  );
+  return onboardingState ? <Onboarding /> : <RootStack />;
 };
 
 export default RootLayout;
-
-const styles = StyleSheet.create({});

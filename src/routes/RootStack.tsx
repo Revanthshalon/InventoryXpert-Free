@@ -1,18 +1,22 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Onboarding from '../screens/onboarding';
-import App from '../../App';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Profile from "../screens/app/profile";
+import AppDrawer from "./app/AppDrawer";
 
 export type RootStackParamList = {
-    Onboarding: undefined;
-    App: undefined;
-}
+  Profile: undefined;
+  App: undefined;
+};
 
 const RootStack = () => {
-    const Stack = createNativeStackNavigator<RootStackParamList>();
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="Onboarding" component={Onboarding} />
-            <Stack.Screen name="App" component={App} />
-        </Stack.Navigator>
-    );
-}
+  const Stack = createNativeStackNavigator<RootStackParamList>();
+  return (
+    <Stack.Navigator
+      initialRouteName="App"
+      screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="App" component={AppDrawer} />
+      <Stack.Screen name="Profile" component={Profile} />
+    </Stack.Navigator>
+  );
+};
+
+export default RootStack;
