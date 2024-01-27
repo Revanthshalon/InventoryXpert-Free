@@ -18,12 +18,18 @@ import {
 } from "react-native-paper";
 import { VariantProp } from "react-native-paper/lib/typescript/components/Typography/types";
 import { ElevationLevels } from "react-native-paper/lib/typescript/types";
-import { Payment, PaymentData } from "../../../../../data/data";
+import {
+  Payment,
+  PaymentData,
+  company,
+  companyData,
+} from "../../../../../data/data";
 import UpcomingPaymentDataRow from "./UpcomingPaymentDataRow";
 import { sortByProperty } from "../../../../utils/helpers";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { JournalStackParamList } from "../../../../routes/app/journal/JournalStack";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import CompaniesDataRow from "../company/components/CompaniesDataRow";
 
 type Props = {
   containerStyle?: ViewStyle;
@@ -53,9 +59,9 @@ const CompaniesTable = ({
   const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
 
   // State
-  const [sortBy, setSortBy] = React.useState<"companyId" | "date" | "amount">(
-    "date"
-  );
+  const [sortBy, setSortBy] = React.useState<
+    "companyName" | "companyContact" | "initalBalance"
+  >("companyName");
   const [sortDirection, setSortDirection] = React.useState<
     "ascending" | "descending"
   >("descending");
@@ -64,8 +70,8 @@ const CompaniesTable = ({
   // const upcomingPayments = useGetUpcomingPayments(); TODO: Implement this hook
 
   // Sort the data
-  const sortedData = sortByProperty<Payment>(
-    PaymentData,
+  const sortedData = sortByProperty<company>(
+    companyData,
     sortBy,
     sortDirection === "ascending"
   );
@@ -96,53 +102,57 @@ const CompaniesTable = ({
           <DataTable.Header>
             <DataTable.Title
               onPress={() => {
-                if (sortBy !== "companyId") {
-                  setSortBy("companyId");
+                if (sortBy !== "companyName") {
+                  setSortBy("companyName");
                 } else {
-                  setSortBy("companyId");
+                  setSortBy("companyName");
                   sortDirection === "ascending"
                     ? setSortDirection("descending")
                     : setSortDirection("ascending");
                 }
               }}
               sortDirection={
-                sortBy === "companyId" ? sortDirection : undefined
+                sortBy === "companyName" ? sortDirection : undefined
               }>
               Company Name
             </DataTable.Title>
             <DataTable.Title
               onPress={() => {
-                if (sortBy !== "amount") {
-                  setSortBy("amount");
+                if (sortBy !== "initalBalance") {
+                  setSortBy("initalBalance");
                 } else {
-                  setSortBy("amount");
+                  setSortBy("initalBalance");
                   sortDirection === "ascending"
                     ? setSortDirection("descending")
                     : setSortDirection("ascending");
                 }
               }}
-              sortDirection={sortBy === "amount" ? sortDirection : undefined}>
+              sortDirection={
+                sortBy === "initalBalance" ? sortDirection : undefined
+              }>
               Amount Due
             </DataTable.Title>
             <DataTable.Title
               onPress={() => {
-                if (sortBy !== "date") {
-                  setSortBy("date");
+                if (sortBy !== "companyContact") {
+                  setSortBy("companyContact");
                 } else {
-                  setSortBy("date");
+                  setSortBy("companyContact");
                   sortDirection === "ascending"
                     ? setSortDirection("descending")
                     : setSortDirection("ascending");
                 }
               }}
-              sortDirection={sortBy === "date" ? sortDirection : undefined}>
+              sortDirection={
+                sortBy === "companyContact" ? sortDirection : undefined
+              }>
               Recent Paid Date
             </DataTable.Title>
           </DataTable.Header>
           <FlatList
             data={sortedData}
-            keyExtractor={(payment) => payment.paymentId}
-            renderItem={({ item }) => <UpcomingPaymentDataRow payment={item} />}
+            keyExtractor={(company) => company.companyId}
+            renderItem={({ item }) => <CompaniesDataRow company={item} />}
           />
         </DataTable>
         <Button
