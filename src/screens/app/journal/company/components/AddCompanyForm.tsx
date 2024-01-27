@@ -5,12 +5,23 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import React, { Dispatch, SetStateAction } from "react";
-import { Button, Text, TextInput, useTheme } from "react-native-paper";
+import React from "react";
+import { Appbar, Button, Text, TextInput, useTheme } from "react-native-paper";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { JournalStackParamList } from "../../../../../routes/app/journal/JournalStack";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {};
 
+type JournlNavigationProps = NativeStackNavigationProp<
+  JournalStackParamList,
+  "AddCompany"
+>;
+
 const AddCompanyForm = () => {
+  // Navigation Setup
+  const navigation = useNavigation<JournlNavigationProps>();
+
   // Screen Dimensions
   const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
 
@@ -24,6 +35,7 @@ const AddCompanyForm = () => {
 
   const submitForm = () => {
     formClear();
+    navigation.goBack();
   };
 
   // State Variables
@@ -37,50 +49,62 @@ const AddCompanyForm = () => {
         Keyboard.dismiss();
       }}>
       <View
-        style={[
-          styles.container,
-          { backgroundColor: useTheme().colors.background },
-        ]}>
-        <Text variant="headlineLarge" style={[{ paddingVertical: 20 }]}>
-          Edit Company Details
-        </Text>
-        <View style={[{ rowGap: 10 }]}>
-          <TextInput
-            label="Company Name"
-            value={companyName}
-            onChangeText={setCompanyName}
+        style={[{ flex: 1, backgroundColor: useTheme().colors.background }]}>
+        <Appbar.Header mode="small" elevated>
+          <Appbar.BackAction
+            onPress={() => {
+              navigation.goBack();
+            }}
           />
-          <TextInput
-            label="Company Contact"
-            value={companyContact}
-            onChangeText={setCompanyContact}
-          />
-          <TextInput
-            label="Initial Balance"
-            value={initialBalance}
-            onChangeText={setInitialBalance}
-          />
-          <TextInput
-            label="GST"
-            value={gstNumber}
-            onChangeText={setGstNumber}
-          />
-        </View>
+          <Appbar.Content title="Add Company" />
+        </Appbar.Header>
         <View
           style={[
-            {
-              flexDirection: "row",
-              width: SCREEN_WIDTH - 20,
-              justifyContent: "space-around",
-              paddingVertical: 20,
-            },
+            styles.container,
+            { backgroundColor: useTheme().colors.background },
           ]}>
-          <Button mode="outlined" onPress={() => {}}>
-            Close
-          </Button>
-          <Button mode="outlined" onPress={submitForm}>
-            Submit
-          </Button>
+          <View style={[{ rowGap: 10 }]}>
+            <TextInput
+              label="Company Name"
+              value={companyName}
+              onChangeText={setCompanyName}
+            />
+            <TextInput
+              label="Company Contact"
+              value={companyContact}
+              onChangeText={setCompanyContact}
+            />
+            <TextInput
+              label="Initial Balance"
+              value={initialBalance}
+              onChangeText={setInitialBalance}
+            />
+            <TextInput
+              label="GST"
+              value={gstNumber}
+              onChangeText={setGstNumber}
+            />
+          </View>
+          <View
+            style={[
+              {
+                flexDirection: "row",
+                width: SCREEN_WIDTH - 20,
+                justifyContent: "space-around",
+                paddingVertical: 20,
+              },
+            ]}>
+            <Button
+              mode="outlined"
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              Close
+            </Button>
+            <Button mode="outlined" onPress={submitForm}>
+              Submit
+            </Button>
+          </View>
         </View>
       </View>
     </TouchableWithoutFeedback>
